@@ -7,7 +7,8 @@ AsciiArt = require '../lib/ascii-art'
 
 describe "AsciiArt", ->
   beforeEach ->
-    atom.packages.activatePackage('ascii-art', immediate: true)
+    waitsForPromise ->
+      atom.packages.activatePackage('ascii-art')
 
   it "has one valid test", ->
     expect("life").toBe "easy"
