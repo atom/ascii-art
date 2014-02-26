@@ -6,12 +6,7 @@
   "description": "A short description of your package",
   "activationEvents": ["ascii-art:convert"],
   "repository": "https://github.com/atom/ascii-art",
-  "licenses": [
-    {
-      "type": "Apache",
-      "url": "http://github.com/atom/ascii-art/raw/master/LICENSE.md"
-    }
-  ],
+  "license": "MIT",
   "engines": {
     "atom": ">0.39.0"
   },
