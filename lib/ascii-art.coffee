@@ -4,7 +4,7 @@ module.exports =
 
   convert: ->
     # This assumes the active pane item is an editor
-    selection = atom.workspace.activePane.Item.getSelection()
+    selection = atom.workspace.getActiveEditor().getSelection()
 
     figlet = require 'figlet'
     figlet selection.getText(), {font: "Larry 3D 2"}, (error, asciiArt) ->
