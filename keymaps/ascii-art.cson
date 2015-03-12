@@ -6,6 +6,6 @@
 # the root workspace element.
 
 # For more detailed documentation see
-# https://www.atom.io/docs/latest/advanced/keymaps
-'.editor':
-  'cmd-alt-a': 'ascii-art:convert'
+# https://atom.io/docs/latest/behind-atom-keymaps-in-depth
+'atom-text-editor':
+  'ctrl-alt-a': 'ascii-art:convert'

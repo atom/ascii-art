@@ -1,14 +1,24 @@
-module.exports =
+{CompositeDisposable} = require 'atom'
+
+module.exports = AsciiArt =
+  subscriptions: null
+
   activate: ->
-    atom.workspaceView.command "ascii-art:convert", => @convert()
+    @subscriptions = new CompositeDisposable
+    @subscriptions.add atom.commands.add 'atom-workspace',
+      'ascii-art:convert': => @convert()
+
+  deactivate: ->
+    @subscriptions.dispose()
 
   convert: ->
-    # This assumes the active pane item is an editor
-    selection = atom.workspace.getActiveEditor().getSelection()
+    if editor = atom.workspace.getActiveTextEditor()
+      selection = editor.getSelectedText()
 
-    figlet = require 'figlet'
-    figlet selection.getText(), {font: "Larry 3D 2"}, (error, asciiArt) ->
-      if error
-        console.error(error)
-      else
-        selection.insertText("\n" + asciiArt + "\n")
+      figlet = require 'figlet'
+      font = "Larry 3D 2"
+      figlet selection, {font: font}, (error, art) ->
+        if error
+          console.error(error)
+        else
+          editor.insertText("\n#{art}\n")
