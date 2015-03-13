@@ -1,6 +1,6 @@
 {CompositeDisposable} = require 'atom'
 
-module.exports = AsciiArt =
+module.exports =
   subscriptions: null
 
   activate: ->
