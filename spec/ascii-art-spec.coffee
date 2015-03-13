@@ -16,7 +16,19 @@ describe "AsciiArt", ->
       atom.workspace.open()
 
   it "converts", ->
+    editor = atom.workspace.getActiveTextEditor()
+    editor.insertText("yo")
+    editor.selectAll()
+    changeHandler = jasmine.createSpy('changeHandler')
+    editor.onDidChange(changeHandler)
+
     atom.commands.dispatch workspaceElement, 'ascii-art:convert'
 
     waitsForPromise ->
       activationPromise
+
+    waitsFor ->
+      changeHandler.callCount > 0
+
+    runs ->
+      expect(editor.getText()).toEqual "\n                 \n                 \n __  __    ___   \n/\\ \\/\\ \\  / __`\\ \n\\ \\ \\_\\ \\/\\ \\L\\ \\\n \\/`____ \\ \\____/\n  `/___/> \\/___/ \n     /\\___/      \n     \\/__/       \n"
