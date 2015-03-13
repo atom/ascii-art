@@ -17,7 +17,7 @@ describe "AsciiArt", ->
 
   it "converts", ->
     editor = atom.workspace.getActiveTextEditor()
-    editor.insertText("yo")
+    editor.insertText("cool")
     editor.selectAll()
     changeHandler = jasmine.createSpy('changeHandler')
     editor.onDidChange(changeHandler)
@@ -31,4 +31,13 @@ describe "AsciiArt", ->
       changeHandler.callCount > 0
 
     runs ->
-      expect(editor.getText()).toEqual "\n                 \n                 \n __  __    ___   \n/\\ \\/\\ \\  / __`\\ \n\\ \\ \\_\\ \\/\\ \\L\\ \\\n \\/`____ \\ \\____/\n  `/___/> \\/___/ \n     /\\___/      \n     \\/__/       \n"
+      expect(editor.getText()).toEqual """
+
+                                     o888  
+    ooooooo     ooooooo     ooooooo   888  
+  888     888 888     888 888     888 888  
+  888         888     888 888     888 888  
+    88ooo888    88ooo88     88ooo88  o888o 
+                                           
+
+"""

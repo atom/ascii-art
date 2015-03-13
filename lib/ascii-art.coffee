@@ -16,7 +16,7 @@ module.exports =
       selection = editor.getSelectedText()
 
       figlet = require 'figlet'
-      font = "Larry 3D 2"
+      font = "o8"
       figlet selection, {font: font}, (error, art) ->
         if error
           console.error(error)
