@@ -1,4 +1,3 @@
-{WorkspaceView} = require 'atom'
 AsciiArt = require '../lib/ascii-art'
 
 # Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
@@ -7,15 +6,38 @@ AsciiArt = require '../lib/ascii-art'
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
 describe "AsciiArt", ->
-  promise = null
+  [workspaceElement, activationPromise] = []
+
   beforeEach ->
-    atom.workspaceView = new WorkspaceView()
-    atom.workspace = atom.workspaceView.model
-    promise = atom.packages.activatePackage('ascii-art')
+    workspaceElement = atom.views.getView(atom.workspace)
+    activationPromise = atom.packages.activatePackage('ascii-art')
+
     waitsForPromise ->
       atom.workspace.open()
 
   it "converts", ->
-    atom.workspaceView.trigger 'ascii-art:convert'
+    editor = atom.workspace.getActiveTextEditor()
+    editor.insertText("cool")
+    editor.selectAll()
+    changeHandler = jasmine.createSpy('changeHandler')
+    editor.onDidChange(changeHandler)
+
+    atom.commands.dispatch workspaceElement, 'ascii-art:convert'
+
     waitsForPromise ->
-      promise
+      activationPromise
+
+    waitsFor ->
+      changeHandler.callCount > 0
+
+    runs ->
+      expect(editor.getText()).toEqual """
+
+                                     o888  
+    ooooooo     ooooooo     ooooooo   888  
+  888     888 888     888 888     888 888  
+  888         888     888 888     888 888  
+    88ooo888    88ooo88     88ooo88  o888o 
+                                           
+
+"""
