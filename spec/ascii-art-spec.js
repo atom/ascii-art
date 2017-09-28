@@ -31,12 +31,12 @@ describe("AsciiArt", function() {
     return runs(() =>
       expect(editor.getText()).toEqual(`\
 
-                                   o888  
-  ooooooo     ooooooo     ooooooo   888  
-888     888 888     888 888     888 888  
-888         888     888 888     888 888  
+                                   o888
+  ooooooo     ooooooo     ooooooo   888
+888     888 888     888 888     888 888
+888         888     888 888     888 888
   88ooo888    88ooo88     88ooo88  o888o 
-                                         
+
 \
 `
       )
