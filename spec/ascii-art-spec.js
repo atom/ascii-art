@@ -1,3 +1,9 @@
+/*
+ * decaffeinate suggestions:
+ * DS101: Remove unnecessary use of Array.from
+ * DS102: Remove unnecessary code created because of implicit returns
+ * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
+ */
 const AsciiArt = require('../lib/ascii-art');
 
 // Use the command `window:run-package-specs` (cmd-alt-ctrl-p) to run specs.
@@ -31,12 +37,12 @@ describe("AsciiArt", function() {
     return runs(() =>
       expect(editor.getText()).toEqual(`\
 
-                                   o888
-  ooooooo     ooooooo     ooooooo   888
-888     888 888     888 888     888 888
-888         888     888 888     888 888
+                                   o888  
+  ooooooo     ooooooo     ooooooo   888  
+888     888 888     888 888     888 888  
+888         888     888 888     888 888  
   88ooo888    88ooo88     88ooo88  o888o 
-
+                                         
 \
 `
       )
