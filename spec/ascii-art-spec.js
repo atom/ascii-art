@@ -6,16 +6,16 @@ const AsciiArt = require('../lib/ascii-art')
 // or `fdescribe`). Remove the `f` to unfocus the block.
 
 describe('AsciiArt', function () {
-  let [workspaceElement, activationPromise] = Array.from([])
+  let workspaceElement, activationPromise
 
   beforeEach(function () {
     workspaceElement = atom.views.getView(atom.workspace)
     activationPromise = atom.packages.activatePackage('ascii-art')
 
-    return waitsForPromise(() => atom.workspace.open())
+    waitsForPromise(() => atom.workspace.open())
   })
 
-  return it('converts', function () {
+  it('converts', function () {
     const editor = atom.workspace.getActiveTextEditor()
     editor.insertText('cool')
     editor.selectAll()
@@ -28,7 +28,7 @@ describe('AsciiArt', function () {
 
     waitsFor(() => changeHandler.callCount > 0)
 
-    return runs(() =>
+    runs(() =>
       expect(editor.getText()).toEqual(`\
 
                                    o888  
